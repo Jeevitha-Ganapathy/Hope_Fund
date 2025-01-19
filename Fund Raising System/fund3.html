@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        /* General Card Styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            width: 500px;
+            background-color: white;
+        }
+
+        /* Header Customization */
+        .card-header {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Form Body Styling */
+        .card-body {
+            padding: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="file"],
+        select {
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 8px;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="file"] {
+            padding: 5px;
+        }
+
+        input::placeholder {
+            color: #aaa;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+            .form-row .col-6 {
+                flex: 1;
+            }
+
+            .form-row input[type="file"] {
+                width: 100%;
+            }
+
+        /* Radio Buttons */
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+            .radio-group label {
+                margin-left: 5px;
+            }
+
+        /* Submit Button */
+        button[type="submit"] {
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+
+        /* Footer Styling */
+        .card-footer {
+            background-color: #f1f1f1;
+            text-align: center;
+            padding: 10px;
+        }
+
+            .card-footer a {
+                color: #007bff;
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+                .card-footer a:hover {
+                    text-decoration: underline;
+                }
+    </style>
+</head>
+<body>
+    <form id="form1" action="/submit" method="post" enctype="multipart/form-data">
+        <div class="card">
+            <div class="card-header">Borrower Registration</div>
+            <div class="card-body">
+
+
+                <!-- Borrower Name -->
+                <label for="tb_name">Borrower Name: <span style="color: red;">*</span></label>
+                <input type="text" id="tb_name" name="tb_name" placeholder="Enter your full name" required />
+
+                <!-- Contact -->
+                <label for="tb_rno">Contact: <span style="color: red;">*</span></label>
+                <input type="tel" id="tb_rno" name="tb_rno" placeholder="Enter a 10-digit phone number.r" required pattern="[0-9]{10}" />
+
+
+                <!-- Purpose of Fund -->
+                <label for="tb_purpose">Purpose of Fund: <span style="color: red;">*</span></label>
+                <input type="text" id="tb_purpose" name="tb_purpose" placeholder="State the purpose of the fund" required />
+
+                <!-- Select Category -->
+                <label>Select a category: <span style="color: red;">*</span></label>
+                <div class="radio-group">
+                    <div>
+                        <input type="radio" id="student" name="category" value="Student" required />
+                        <label for="student">Student</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="faculty" name="category" value="Faculty" />
+                        <label for="faculty">Faculty</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="other" name="category" value="Other" />
+                        <label for="other">Other</label>
+                    </div>
+                </div>
+
+                <!-- Dropdowns -->
+                <div class="form-row">
+                    <div class="col-6">
+                        <label for="dd_aoi">Area of Interest: <span style="color: red;">*</span></label>
+                        <select id="dd_aoi" name="aoi" required>
+                            <option value="">Select Domain of your Project</option>
+                            <option value="Java">Java</option>
+                            <option value="Python">Python</option>
+                            <option value="Swing">Swing</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label for="bank">Reputed Bank: <span style="color: red;">*</span></label>
+                        <select id="bank" name="bank" required>
+                            <option value="">Select Bank for Loan Transaction</option>
+                            <option value="SBI">SBI</option>
+                            <option value="BOI">BOI</option>
+                            <option value="ICICI">ICICI</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- File Uploads -->
+                <div class="form-row">
+                    <div class="col-6">
+                        <label for="passbook">Upload your Bank PassBook: <span style="color: red;">*</span></label>
+                        <input type="file" id="passbook" name="passbook" required />
+                    </div>
+                    <div class="col-6">
+                        <label for="photo">Upload your Photo: <span style="color: red;">*</span></label>
+                        <input type="file" id="photo" name="photo" required />
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit">Apply Loan</button>
+            </div>
+            <div class="card-footer">
+                For further details: <a href="https://www.xpressloan.in/">www.XpressLoan.com</a>
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>
